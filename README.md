@@ -1,5 +1,3 @@
-# logic-project
-
 <h1> Projeto Lógica 2016.1 </h1>
 
 <h2> Equipe </h2>
