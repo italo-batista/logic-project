@@ -2,89 +2,90 @@
 
 module sistema
 
-sig Sistema {
-	medicos : set Medico,
-	pacientes : set Paciente, 
-	gerentes : set Gerente,
-	suporte: one Suporte,
-	cadastros: set Cadatro
-}
 
 sig Medico {
-	cadastro : one Cadastro,
 	pacientes : some Paciente // cada medico deve possuir pelo menos um paciente
 }
 
 sig Paciente {
-	cadastro : one Cadastro,
 	sintomas : set Sintoma
 }
 
 sig Gerente {
+	cadastrou : set Medico
 }
 
-sig Suporte {
-	email: one Email,
-	telefone: one Telefone
+one sig Suporte {
+
 }
-
-sig Cadastro {	
-		nome: one Nome,
-		nascimento: one Nascimento,
-		email: one Email,
-		senha: one Senha
-}
-
-sig Nome {}
-
-sig Nascimento {}
-
-sig Email {}
-
-sig Senha {}
-
-sig Telefone {}
 
 abstract sig Sintoma {
 }
 
-sig Febre extends Sintoma {
+lone sig Febre extends Sintoma {
 }
 
-sig DorMuscular extends Sintoma {
+lone sig DorMuscular extends Sintoma {
 }
 
-sig GargantaInflamada extends Sintoma {
+lone sig GargantaInflamada extends Sintoma {
 }
 
-sig Cansaco extends Sintoma {
+lone sig Cansaco extends Sintoma {
 }
 
 
 -------- Funções ---------
 
-// paciente informa sintoma (o novo sintoma é adicionado aos seus sintomas
-fun InformarSintoma [p:Paciente]: Sintoma {
-	p.sintomas
+
+
+
+-------- Predicados -------------------
+
+// o sistema possui exatamente dois gerentes
+pred qntGerentes[] {
+	#(Gerente) = 2
+}
+
+// cada médico tem até 3 pacientes
+pred maxPacientes [m:Medico] {
+	#(m.pacientes ) <= 3
+}
+
+// não há paciente sem médico
+pred pacienteSemMedico[p:Paciente] {
+	#(p.~(pacientes ) ) != 0
+}
+
+// Todo médico foi cadastrado por um gerente
+pred medicoCadastrado[m:Medico, g:Gerente] {
+	m in g.cadastrou
 }
 
 
 -------- Fatos (restrições) ---------
 
-// o sistema possui exatamente dois gerentes
-fact QntMedicos {
-	all s : Sistema | #(s.gerentes) = 2
+fact {
+
+	qntGerentes[]
+
+	all m : Medico | maxPacientes[m]
+
+	all p : Paciente | pacienteSemMedico[p]
+
+	all m : Medico | one g : Gerente | medicoCadastrado[m, g]
 }
 
 
-// cada médico tem até 3 pacientes
-fact QntPacientes {
-	all m : Medico | #(m.pacientes) <= 3
-}
+-------- Asserts ---------------------------
+
+
+
+-------- Checks ----------------------------
 
 
 
 pred show[] {
 }
 
-run show
+run show for 5
