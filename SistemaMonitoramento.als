@@ -3,18 +3,11 @@
 module sistema
 
 sig Sistema {
-	gerentes : set Gerente,
 	medicos : set Medico,
-	pacientes : set Paciente
-}
-
-// medicos ou pacientes precisam de usuario e senha (cadastro) para acessar o sistema
-// gerentes adicionam medicos adicionando cadastro de medicos ao sistema
-// paciente se cadastram no sistema se cadastrando
-sig Cadastro {	
-}
-
-sig Gerente {
+	pacientes : set Paciente, 
+	gerentes : set Gerente,
+	suporte: one Suporte,
+	cadastros: set Cadatro
 }
 
 sig Medico {
@@ -26,6 +19,31 @@ sig Paciente {
 	cadastro : one Cadastro,
 	sintomas : set Sintoma
 }
+
+sig Gerente {
+}
+
+sig Suporte {
+	email: one Email,
+	telefone: one Telefone
+}
+
+sig Cadastro {	
+		nome: one Nome,
+		nascimento: one Nascimento,
+		email: one Email,
+		senha: one Senha
+}
+
+sig Nome {}
+
+sig Nascimento {}
+
+sig Email {}
+
+sig Senha {}
+
+sig Telefone {}
 
 abstract sig Sintoma {
 }
