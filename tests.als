@@ -15,6 +15,6 @@ assert pacienteDoente {
 }
 
 
--------- Asserts ---------
+-------- Checks ---------
 
 check pacienteDoente
