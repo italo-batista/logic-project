@@ -6,7 +6,7 @@
 
 open signatures
 open functions
-
+open constraints
 
 assert pacienteDoente {
 	!some p:Paciente |

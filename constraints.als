@@ -23,7 +23,7 @@ pred medicoCadastrado[m:Medico, g:Gerente] {
 
 pred teste [p:Paciente] {
 	(Doenca in (p.doencas)) implies	( (Cansaco in p.sintomas) && (DorMuscular in p.sintomas) )
-	(Doenca !in (p.doencas)) implies	( (Cansaco !in p.sintomas) && (DorMuscular !in p.sintomas) )
+	--(Doenca !in (p.doencas)) implies	( (Cansaco !in p.sintomas) && (DorMuscular !in p.sintomas) )
 }
 
 -------- Fatos (restrições) ---------
@@ -33,9 +33,9 @@ fact {
 	qntGerentes[]
 
 	// todo médico o intem até três pacientes
-	all m : Medico | #(pacientesDoMedico[m]) <= 3
+	--all m : Medico | #(pacientesDoMedico[m]) <= 3
 
-	all p : Paciente | pacienteSemMedico[p]
+--	all p : Paciente | pacienteSemMedico[p]
 
 	all m : Medico | one g : Gerente | medicoCadastrado[m, g]
 
