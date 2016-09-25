@@ -36,8 +36,9 @@ lone sig Cansaco extends Sintoma {
 
 
 -------- Funções ---------
-
-
+fun pacientesDoMedico[m:Medico]: set Paciente {
+	m.pacientes
+}
 
 
 -------- Predicados -------------------
@@ -45,11 +46,6 @@ lone sig Cansaco extends Sintoma {
 // o sistema possui exatamente dois gerentes
 pred qntGerentes[] {
 	#(Gerente) = 2
-}
-
-// cada médico tem até 3 pacientes
-pred maxPacientes [m:Medico] {
-	#(m.pacientes ) <= 3
 }
 
 // não há paciente sem médico
@@ -69,7 +65,7 @@ fact {
 
 	qntGerentes[]
 
-	all m : Medico | maxPacientes[m]
+	all m : Medico | #(pacientesDoMedico[m]) <= 3
 
 	all p : Paciente | pacienteSemMedico[p]
 
