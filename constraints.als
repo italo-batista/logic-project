@@ -21,9 +21,9 @@ pred medicoCadastrado[m:Medico, g:Gerente] {
 	m in g.cadastrou
 }
 
-pred teste [p:Paciente] {
-	(Doenca in (p.doencas)) implies	( (Cansaco in p.sintomas) && (DorMuscular in p.sintomas) )
-	(Doenca !in (p.doencas)) implies	( (Cansaco !in p.sintomas) && (DorMuscular !in p.sintomas) )
+pred doente [p:Paciente] {
+	(Doenca in (p.doencas))  <=>	 ( (Cansaco in p.sintomas) and (DorMuscular in p.sintomas) )
+	(Doenca !in (p.doencas)) <=>	 ( (Cansaco !in p.sintomas) or (DorMuscular !in p.sintomas) )
 }
 
 -------- Fatos (restrições) ---------
@@ -39,6 +39,6 @@ fact {
 
 	all m : Medico | one g : Gerente | medicoCadastrado[m, g]
 
-	all p:Paciente | teste[p]
+	all p:Paciente | doente[p]
 
 }
