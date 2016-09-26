@@ -6,6 +6,7 @@ open state_erro
 open signatures as s
 open constraints
 open functions
+open state_paciente
 
 pred show[]{}
 
