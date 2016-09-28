@@ -7,12 +7,12 @@ module sistema
 open signatures as s
 
 -- surgimento de novos erros
-pred surgiuErro[e: Erro, t, t': Tempo]{
+pred surgiuErro[e: Erro, t, t': Tempo] {
 	(Suporte.erroInformado).t' = (Suporte.erroInformado). t + e
 }
 
 -- manutenção de erros 
-pred erroResolvido[e: Erro, t, t': Tempo]{
+pred erroResolvido[e: Erro, t, t': Tempo] {
 	e in Suporte.erroInformado.t
 	(Suporte.erroInformado).t' = (Suporte.erroInformado).t - e
 }

@@ -1,8 +1,9 @@
 
 -- Restrições do Sistema
 
-open signatures
+open signatures  as s
 open functions
+
 
 -------- Predicados -------------------
 
@@ -21,7 +22,7 @@ pred medicoCadastrado[m:Medico, g:Gerente] {
 	m in g.cadastrou
 }
 
--- o paciente está com dengue, se somente se, possui os sintomas específicos
+-- o paciente está com dengue se, e somente se, possui os sintomas específicos
 pred isDengue[doencas: Doenca, sintomas:Sintoma] {
 	(DorMuscular in sintomas and Febre in sintomas and Cansaco in sintomas) <=> Dengue in doencas
 }
@@ -42,10 +43,12 @@ pred checkDoenca[doencas: Doenca, sintomas:Sintoma] {
 	isVirose[doencas, sintomas]
 }
 
-// se o paciente está doente tem que obdecer os predicados de doenças
-pred doente [p:Paciente] {
+-- se o paciente está doente, ele tem que obdecer os predicados de doenças
+pred diagnostico[p:Paciente] {
 	all t: Tempo | checkDoenca[p.doencas.t, p.sintomas.t] 
 }
+
+
 
 -------- Fatos (restrições) ---------
 
@@ -53,7 +56,7 @@ fact {
 
 	qntGerentes[]
 
-	-- todo médico o intem até três pacientes
+	-- todo médico tem até três pacientes
 	all m : Medico | #(pacientesDoMedico[m]) <= 3
 	
 	-- nao há paciente sem médico
@@ -62,7 +65,9 @@ fact {
 	-- não há medico sem gerente
 	all m : Medico | one g : Gerente | medicoCadastrado[m, g]
 	
-	-- condições de doença
-	all p:Paciente | doente[p]
+	-- diagnostico de doença (ou não) de paciente
+	all p:Paciente | diagnostico[p]
 
+	-- não há mais que dois erros no sistema em um mesmo instante
+	not some t: Tempo | #(Suporte.erroInformado.t) > 2 
 }

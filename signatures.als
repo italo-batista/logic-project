@@ -15,6 +15,8 @@ sig Paciente {
 	doencas : set Doenca -> Tempo
 }
 
+
+-- sintomas
 abstract sig Sintoma {
 }
 
@@ -30,7 +32,7 @@ one sig GargantaInflamada extends Sintoma {
 one sig Cansaco extends Sintoma {
 }
 
--- doenças --
+-- doenças 
 abstract sig Doenca {
 }
 
@@ -53,7 +55,6 @@ one sig Suporte {
 }
 
 -- erros
-
 abstract sig Erro{}
 
 one sig TelaAzul extends Erro{}

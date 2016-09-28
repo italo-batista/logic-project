@@ -1,5 +1,5 @@
 
-open signatures
+open signatures  as s
 module sistema
 
 -------- Funções ---------
