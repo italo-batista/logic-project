@@ -1,12 +1,13 @@
 
-
 module sistema
 
-open state_erro
 open signatures as s
 open constraints
 open functions
 open state_paciente
+open state_erro
+open state_medico
+open tests
 
 pred show[]{}
 

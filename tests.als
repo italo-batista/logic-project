@@ -1,10 +1,9 @@
 
--- Testes
-
 open signatures  as s
 open functions
 open constraints
 
+-- Testes
 
 -------- Asserts ---------
 
@@ -26,21 +25,29 @@ assert pacienteVirose {
 		(Virose in p.doencas.t  && #(p.sintomas.t) != 1 )
 }
 
--- Checa se é possível ter mais que dois erros
+-- checa se é possível ter mais que dois erros
 assert quantidadeDeErros{
 	all t: Tempo | #(Suporte.erroInformado.t) <= 2
 }
 
--- Checa se é possível solucionar o erro
+-- checa se é possível solucionar o erro
 assert adicionouExcluiu{
 	not some t: Tempo | (#(Suporte.erroInformado.t) > 2 &&  #(Suporte.erroInformado.last) = 2)
 }
 
--- Checa se é possível solucionar todos os erros
+-- checa se é possível solucionar todos os erros
 assert tudoSolucionado{
 	not some t: Tempo | (#(Suporte.erroInformado.t) > 2 &&  #(Suporte.erroInformado.last) = 0)
 }
 
+-- nenhum medico foi cadastrado por mais de um gerente
+assert medicoDuplamenteCadastrado {
+	all m:Medico | one g1:Gerente | all g2:(Gerente-g1) | all t:Tempo | m in g1.cadastrou.t && m !in g2.cadastrou.t 
+}
+
+assert medicoNaoOrfao {
+	all m:Medico | some g:Gerente | all t:Tempo | m in g.cadastrou.t
+}
 
 -------- Checks ---------
 
@@ -55,4 +62,7 @@ assert tudoSolucionado{
 --check adicionouExcluiu
 
 --check tudoSolucionado
+
+--check medicoDuplamenteCadastrado
  
+--check medicoNaoOrfao

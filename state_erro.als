@@ -1,10 +1,9 @@
 
-
 module sistema
+open signatures as s
+
 
 -------- Modelagem dinâmica de erro --------
-
-open signatures as s
 
 -- surgimento de novos erros
 pred surgiuErro[e: Erro, t, t': Tempo] {

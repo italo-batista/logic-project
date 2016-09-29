@@ -1,8 +1,8 @@
 
--- Signatures
-
 module sistema
 open util/ordering[Tempo] 
+
+-- Signatures
 
 sig Tempo{} -- possibilita a modelagem dinâmica
 
@@ -47,7 +47,7 @@ one sig Gripe extends Doenca {
 
 
 sig Gerente {
-	cadastrou : set Medico
+	cadastrou : set Medico -> Tempo
 }
 
 one sig Suporte {

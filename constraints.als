@@ -1,8 +1,9 @@
 
--- Restrições do Sistema
-
 open signatures  as s
 open functions
+
+
+-- Restrições do Sistema
 
 
 -------- Predicados -------------------
@@ -17,9 +18,10 @@ pred pacienteSemMedico[p:Paciente] {
 	#(p.~(pacientes ) ) != 0
 }
 
--- todo médico foi cadastrado por um gerente
-pred medicoCadastrado[m:Medico, g:Gerente] {
-	m in g.cadastrou
+-- não há medico sem gerente
+pred medicoCadastrado[m:Medico, g1:Gerente, g2:Gerente, t:Tempo] {
+	m in g1.cadastrou.t
+	m in g1.cadastrou.t => m !in g2.cadastrou.t
 }
 
 -- o paciente está com dengue se, e somente se, possui os sintomas específicos
@@ -49,7 +51,6 @@ pred diagnostico[p:Paciente] {
 }
 
 
-
 -------- Fatos (restrições) ---------
 
 fact {
@@ -62,8 +63,8 @@ fact {
 	-- nao há paciente sem médico
 	all p : Paciente | pacienteSemMedico[p]
 	
-	-- não há medico sem gerente
-	all m : Medico | one g : Gerente | medicoCadastrado[m, g]
+	-- todo médico foi cadastrado por um único gerente 
+	all m:Medico | one g1:Gerente | all g2:(Gerente - g1) | all t:Tempo | medicoCadastrado[m, g1, g2, t]
 	
 	-- diagnostico de doença (ou não) de paciente
 	all p:Paciente | diagnostico[p]

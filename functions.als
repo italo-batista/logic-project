@@ -1,6 +1,6 @@
 
-open signatures  as s
 module sistema
+open signatures  as s
 
 -------- Funções ---------
 
