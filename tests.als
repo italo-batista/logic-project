@@ -66,3 +66,5 @@ assert medicoNaoOrfao {
 --check medicoDuplamenteCadastrado
  
 --check medicoNaoOrfao
+
+--check medicoCadastradoUmaVez

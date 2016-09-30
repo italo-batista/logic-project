@@ -64,7 +64,7 @@ fact {
 	all p : Paciente | pacienteSemMedico[p]
 	
 	-- todo médico foi cadastrado por um único gerente 
-	all m:Medico | one g1:Gerente | all g2:(Gerente - g1) | all t:Tempo | medicoCadastrado[m, g1, g2, t]
+	all m:Medico | one g1:Gerente | all g2:(Gerente - g1) | all t:Tempo  | medicoCadastrado[m, g1, g2, t]
 	
 	-- diagnostico de doença (ou não) de paciente
 	all p:Paciente | diagnostico[p]
