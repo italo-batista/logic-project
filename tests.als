@@ -20,7 +20,7 @@ assert pacienteGripe {
 }
 
 -- se um paciente não sente nenhum sintoma ele não pode ter Virose
-assert pacienteVirose {
+assert pacienteCatapora {
 	all m:Medico, t: Tempo| !some p:pacientesDoMedico[m] |
 		(Catapora in p.doencas.t  && ((Febre !in p.sintomas.t) or (BolhasNaPele !in p.sintomas.t)  or (Cansaco !in p.sintomas.t) ) )
 }
@@ -55,7 +55,7 @@ assert medicoNaoOrfao {
 
 --check pacienteGripe
 
---check pacienteVirose
+--check pacienteCatapora
 
 --check quantidadeDeErros
 
@@ -66,5 +66,3 @@ assert medicoNaoOrfao {
 --check medicoDuplamenteCadastrado
  
 --check medicoNaoOrfao
-
---check medicoCadastradoUmaVez

@@ -47,7 +47,7 @@ pred checkDoenca[doencas: Doenca, sintomas:Sintoma] {
 
 -- se o paciente está doente, ele tem que obdecer os predicados de doenças
 pred diagnostico[p:Paciente] {
-	all t: Tempo | checkDoenca[p.doencas.t, p.sintomas.t] 
+	all t: Tempo | checkDoenca[doencasDoPaciente[p, t],sintomasDoPaciente[p, t]]
 }
 
 
