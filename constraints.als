@@ -35,14 +35,14 @@ pred isGripe[doencas: Doenca, sintomas:Sintoma] {
 }
 
 -- o paciente está com virose, se e somente se, está com um sintoma
-pred isVirose[doencas: Doenca, sintomas:Sintoma] {
-	(#sintomas = 1 ) <=> Virose in doencas
+pred isCatapora[doencas: Doenca, sintomas:Sintoma] {
+	(BolhasNaPele in sintomas and Febre in sintomas and Cansaco in sintomas) <=> Catapora in doencas
 }
 
 pred checkDoenca[doencas: Doenca, sintomas:Sintoma] {
 	isDengue[doencas, sintomas]
 	isGripe[doencas, sintomas]
-	isVirose[doencas, sintomas]
+	isCatapora[doencas, sintomas]
 }
 
 -- se o paciente está doente, ele tem que obdecer os predicados de doenças
@@ -62,9 +62,9 @@ fact {
 	
 	-- nao há paciente sem médico
 	all p : Paciente | pacienteSemMedico[p]
-	
+
 	-- todo médico foi cadastrado por um único gerente 
-	all m:Medico | one g1:Gerente | all g2:(Gerente - g1) | all t:Tempo | medicoCadastrado[m, g1, g2, t]
+	all m:Medico | one g1:Gerente | all g2:(Gerente - g1) | all t:Tempo| medicoCadastrado[m, g1, g2, t]
 	
 	-- diagnostico de doença (ou não) de paciente
 	all p:Paciente | diagnostico[p]

@@ -7,6 +7,7 @@ open signatures as s
 
 -- surgimento de novos erros
 pred surgiuErro[e: Erro, t, t': Tempo] {
+	e !in (Suporte.erroInformado).t
 	(Suporte.erroInformado).t' = (Suporte.erroInformado). t + e
 }
 

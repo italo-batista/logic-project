@@ -15,37 +15,6 @@ sig Paciente {
 	doencas : set Doenca -> Tempo
 }
 
-
--- sintomas
-abstract sig Sintoma {
-}
-
-one sig Febre extends Sintoma {
-}
-
-one sig DorMuscular extends Sintoma {
-}
-
-one sig GargantaInflamada extends Sintoma {
-}
-
-one sig Cansaco extends Sintoma {
-}
-
--- doenças 
-abstract sig Doenca {
-}
-
-one sig Dengue extends Doenca {
-}
-
-one sig Virose extends Doenca {
-}
-
-one sig Gripe extends Doenca {
-}
-
-
 sig Gerente {
 	cadastrou : set Medico -> Tempo
 }
@@ -53,6 +22,28 @@ sig Gerente {
 one sig Suporte {
 	erroInformado: set Erro -> Tempo
 }
+
+-- sintomas
+abstract sig Sintoma {}
+
+one sig Febre extends Sintoma {}
+
+one sig DorMuscular extends Sintoma {}
+
+one sig GargantaInflamada extends Sintoma {}
+
+one sig Cansaco extends Sintoma {}
+
+one sig BolhasNaPele extends Sintoma {}
+
+-- doenças 
+abstract sig Doenca {}
+
+one sig Dengue extends Doenca {}
+
+one sig Catapora extends Doenca {}
+
+one sig Gripe extends Doenca {}
 
 -- erros
 abstract sig Erro{}

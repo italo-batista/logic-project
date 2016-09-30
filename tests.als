@@ -22,7 +22,7 @@ assert pacienteGripe {
 -- se um paciente não sente nenhum sintoma ele não pode ter Virose
 assert pacienteVirose {
 	all m:Medico, t: Tempo| !some p:pacientesDoMedico[m] |
-		(Virose in p.doencas.t  && #(p.sintomas.t) != 1 )
+		(Catapora in p.doencas.t  && ((Febre !in p.sintomas.t) or (BolhasNaPele !in p.sintomas.t)  or (Cansaco !in p.sintomas.t) ) )
 }
 
 -- checa se é possível ter mais que dois erros
