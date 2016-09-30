@@ -11,7 +11,7 @@ open tests
 
 pred show[]{}
 
-run show for 5
+run show for 9
 
 
 

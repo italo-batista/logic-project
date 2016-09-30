@@ -1,6 +1,7 @@
 
 module sistema
 open signatures  as s
+open constraints as c
 
 -------- Modelagem dinâmica de paciente --------
 
